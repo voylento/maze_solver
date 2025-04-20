@@ -9,7 +9,7 @@ class Cell:
         self.has_top_wall = self.has_right_wall = self.has_bottom_wall = self.has_left_wall = True
         self.window = window
         self.visited = False
-        self.wall_color = "purple"
+        self.wall_color = "black"
 
     def draw(self):
         if self.has_top_wall:
@@ -53,7 +53,7 @@ class Cell:
 
         line = Line(Point(x_center, y_center), Point(x_center2, y_center2))
         if self.window:
-            self.window.draw_line(line, "gray" if undo else "red")
+            self.window.draw_line(line, "red" if undo else "green3")
 
     def get_center_point(self):
         midx = abs(self.p2.x - self.p1.x) // 2

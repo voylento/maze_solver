@@ -23,11 +23,11 @@ class Maze:
 
         self.cells = self.create_cells()
         self.break_entrance_and_exit()
-        # self.create_path_iter()
-        self.create_path_r(
-                random.randrange(0, self.c_cols), 
-                random.randrange(0, self.c_rows)
-            )
+        self.create_path_iter()
+        # self.create_path_r(
+        #         random.randrange(0, self.c_cols), 
+        #         random.randrange(0, self.c_rows)
+        #     )
         self.reset_cells_to_unvisited()
         self.draw_cells()
     
@@ -133,7 +133,7 @@ class Maze:
         return self.solve_r(0, 0)
 
     def solve_r(self, i, j):
-        self.animate()
+        self.animate(.03)
         self.cells[i][j].visited = True
 
         if i == self.c_cols - 1 and j == self.c_rows - 1:
@@ -155,7 +155,7 @@ class Maze:
             self.cells[i][j].draw_move(self.cells[next_i][next_j])
             if not self.solve_r(next_i, next_j):
                 self.cells[i][j].draw_move(self.cells[next_i][next_j], undo=True)
-                self.animate()
+                self.animate(0.03)
             else:
                 return True
 
@@ -180,7 +180,9 @@ class Maze:
                 cell.draw()
                 self.animate()
 
-    def animate(self):
+    def animate(self, sleep_time=None):
         if self.window:
             self.window.redraw()
+            if sleep_time:
+                time.sleep(sleep_time)
         
